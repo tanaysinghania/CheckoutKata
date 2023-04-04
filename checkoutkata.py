@@ -1,6 +1,8 @@
+#Below is the solution the Checkout Kata problem(Kata09) 
+
 class Checkout:
-    def __init__(self, pricing_rules):
-        self.pricing_rules = pricing_rules
+    def __init__(self, rules):
+        self.rules = rules
         self.items = {}
 
     def scan(self, item):
@@ -12,7 +14,7 @@ class Checkout:
     def calcTotal(self):
         total = 0
         for item, quantity in self.items.items():
-            item_rules = self.pricing_rules.get(item, {})
+            item_rules = self.rules.get(item, {})
             uPrice = item_rules.get('uPrice', 0)
             sPrice = item_rules.get('sPrice', {})
             if sPrice and quantity >= sPrice.get('quantity', 0):
@@ -22,14 +24,14 @@ class Checkout:
         return total
 
 
-pricing_rules = {
+rules = {
     'A': {'uPrice': 70, 'sPrice': {'quantity': 3, 'price': 180}},
     'B': {'uPrice': 50, 'sPrice': {'quantity': 3, 'price': 140}},
     'C': {'uPrice': 30},
     'D': {'uPrice': 45},
 }
 
-co = Checkout(pricing_rules)
+co = Checkout(rules)
 
 co.scan('A')
 co.scan('B')
